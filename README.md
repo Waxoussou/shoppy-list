@@ -1,5 +1,7 @@
 # shoppy-list
 
+[live Demo](https://waxoussou.github.io/shoppy-list/)
+
 ## Project setup
 ```
 npm install
