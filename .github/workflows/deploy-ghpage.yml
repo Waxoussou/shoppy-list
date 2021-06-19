@@ -1,4 +1,4 @@
-name: App
+name: gh-pages Auto Deploy 
 
 on:
   # trigger deployment on every push to doc branch
@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  App:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
