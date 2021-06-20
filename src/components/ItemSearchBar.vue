@@ -1,14 +1,12 @@
 <template>
-    <!-- <v-app> -->
-    <v-row justify="center">
-        <v-col cols="8">
+    <v-row justify="center" no-gutters>
+        <v-col cols="7" align-self="center">
             <v-autocomplete
                 v-model="select"
                 :items="items"
-                solo
-                rounded
                 clearable
-                @change="updateCurrentValue"
+                solo
+                @keyup="updateCurrentValue"
             >
                 <template v-slot:no-data>
                     <v-list-item class="d-flex flex-column space-around">
@@ -18,27 +16,42 @@
                         </v-list-item-content>
                     </v-list-item>
                 </template>
+                <!-- <template v-slot:append-outer>
+                    <v-btn fab color="primary">Add</v-btn>
+                </template> -->
             </v-autocomplete>
         </v-col>
+
+        <v-col cols="1">
+            <v-btn @click="addItemToSelection" fab color="success"
+                ><v-icon> mdi-plus </v-icon>
+            </v-btn>
+        </v-col>
     </v-row>
-    <!-- </v-app> -->
-    <!-- </v-container> -->
-    <!-- </v-card> -->
 </template>
 
 <script>
 export default {
-    name: "About",
+    name: "ItemSearchBar",
     data() {
         return {
             select: null,
             items: ["tomatoes", "oranges", "yaourt", "lait"],
         };
     },
+
     methods: {
         updateCurrentValue(e) {
-            console.log(e);
+            console.log(e.target.value);
+            return e.target.value;
+        },
+        addItemToSelection() {
+            console.log(this.select);
+            this.$store.commit("selection/addItem", this.select);
         },
     },
 };
 </script>
+
+<style>
+</style>

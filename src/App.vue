@@ -1,11 +1,13 @@
 <template>
     <div id="app">
         <v-app>
-            <div id="nav">
-                <router-link to="/">Home</router-link> |
-                <router-link to="/about">About</router-link>
-            </div>
-            <router-view />
+            <v-main>
+                <v-container fluid style="height: 100%">
+                    <router-view></router-view>
+                </v-container>
+            </v-main>
+
+            <v-footer app> </v-footer>
         </v-app>
     </div>
 </template>
@@ -17,7 +19,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    min-height: 100vh;
+    // min-height: 100vh;
 }
 
 #nav {
