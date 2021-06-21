@@ -4,20 +4,31 @@
             <ItemList />
         </v-row>
         <v-row align="end" class="searchBar">
-            <ItemSearchBar />
+            <ItemSearchBar @open-dialog="dialog = !dialog" />
         </v-row>
+        <ItemEditQuantity />
     </v-container>
 </template>
 
 <script>
-import ItemSearchBar from "@/components/ItemSearchBar.vue";
-import ItemList from "@/components/ItemList.vue";
+import {
+    ItemSearchBar,
+    ItemList,
+    ItemEditQuantity,
+} from "@/components";
 
 export default {
     name: "ShoppingList",
-    components: { ItemList, ItemSearchBar },
+    components: {
+        ItemList,
+        ItemSearchBar,
+        ItemEditQuantity,
+    },
     data() {
-        return {};
+        return { dialog: false };
+    },
+    created() {
+        this.$store.dispatch("product/_init");
     },
 };
 </script>

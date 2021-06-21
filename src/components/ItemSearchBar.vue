@@ -12,7 +12,14 @@
                     <v-list-item class="d-flex flex-column space-around">
                         <v-list-item-title> No result </v-list-item-title>
                         <v-list-item-content>
-                            <v-btn color="primary"> Add a new Item</v-btn>
+                            <ItemCreationModal />
+
+                            <!-- <v-btn
+                                @click="$emit('open-dialog')"
+                                color="primary"
+                            >
+                                Add a new Item</v-btn
+                            > -->
                         </v-list-item-content>
                     </v-list-item>
                 </template>
@@ -23,7 +30,11 @@
         </v-col>
 
         <v-col cols="1">
-            <v-btn :disabled="!select" @click="addItemToSelection" fab color="success"
+            <v-btn
+                :disabled="!select"
+                @click="addItemToSelection"
+                fab
+                color="success"
                 ><v-icon> mdi-plus </v-icon>
             </v-btn>
         </v-col>
@@ -31,13 +42,20 @@
 </template>
 
 <script>
+import { ItemCreationModal } from "@/components";
 export default {
     name: "ItemSearchBar",
+    components: { ItemCreationModal },
     data() {
         return {
             select: null,
-            items: ["tomatoes", "oranges", "yaourt", "lait"],
         };
+    },
+
+    computed: {
+        items() {
+            return this.$store.getters["product/byName"];
+        },
     },
 
     methods: {
@@ -46,7 +64,6 @@ export default {
             return e.target.value;
         },
         addItemToSelection() {
-            console.log(this.select);
             this.$store.commit("selection/addItem", { name: this.select });
         },
     },

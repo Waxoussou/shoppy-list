@@ -1,66 +1,47 @@
 <template>
     <v-card v-if="items.length">
         <v-list>
+            <!-- v-for="(category, index) in categories" :key="index" -->
+            <!-- <v-subheader>{{ category }}</v-subheader> -->
             <v-list-item v-for="(item, index) in items" :key="index">
-                <v-container>
-                    <v-row>
-                        <v-list-item-action-text>
-                            X {{ item.quantity || 1 }}
-                        </v-list-item-action-text>
-                        <v-list-item-content>
-                            {{ item.name || item }}
-                        </v-list-item-content>
-                        <v-list-item-action>
-                            <v-row>
-                                <v-btn
-                                    @click="openUpdateItemModal(item)"
-                                    color="primary"
-                                    fab
-                                    icon
-                                >
-                                    <v-icon> mdi-pencil </v-icon>
-                                </v-btn>
-                                <v-btn
-                                    @click="removeItem(item)"
-                                    color="success"
-                                    icon
-                                    fab
-                                >
-                                    <v-icon>mdi-check</v-icon>
-                                </v-btn>
-                            </v-row>
-                        </v-list-item-action>
-                    </v-row>
-                    <v-row v-if="!isLastItem(item)">
-                        <v-col cols="12">
-                            <v-divider></v-divider>
-                        </v-col>
-                    </v-row>
-                </v-container>
+                <Item :item="item" />
             </v-list-item>
+            <v-divider></v-divider>
         </v-list>
     </v-card>
+    <v-row v-else justify="center" align="center" style="min-height: 500px">
+        <v-spacer></v-spacer>
+        <v-col cols="12">
+            <p>No product recorded yet.</p>
+            <p>Start adding one</p>
+        </v-col>
+        <v-spacer></v-spacer>
+    </v-row>
 </template>
 
 <script>
+import Category from "@/services/Category";
+import Item from "./Item.vue";
 export default {
+    components: {
+        Item,
+    },
+    data() {
+        return { categories: [] };
+    },
+
     computed: {
         items() {
             return this.$store.state.selection.items;
         },
+        itemsByCategory() {
+            return this.$store.getters["selection/byCategory"];
+        },
     },
-    methods: {
-        isLastItem(item) {
-            const len = this.items.length;
-            const index = this.items.indexOf(item);
-            return index + 1 === len;
-        },
-        openUpdateItemModal(item) {
-            this.$store.commit("selection/select", item);
-        },
-        removeItem(item) {
-            this.$store.commit("selection/removeItem", item);
-        },
+
+    async created() {
+        await Category.fetchData();
+        this.categories = Category.getCategories();
     },
 };
 </script>
