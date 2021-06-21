@@ -1,9 +1,9 @@
 <template>
     <v-container style="height: 100%">
-        <v-row>
+        <v-row justify="center">
             <ItemList />
         </v-row>
-        <v-row align="end" style="height: 100%" class="searchBar">
+        <v-row align="end" class="searchBar">
             <ItemSearchBar />
         </v-row>
     </v-container>
@@ -16,6 +16,9 @@ import ItemList from "@/components/ItemList.vue";
 export default {
     name: "ShoppingList",
     components: { ItemList, ItemSearchBar },
+    data() {
+        return {};
+    },
 };
 </script>
 

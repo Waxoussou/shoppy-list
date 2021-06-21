@@ -23,7 +23,7 @@
         </v-col>
 
         <v-col cols="1">
-            <v-btn @click="addItemToSelection" fab color="success"
+            <v-btn :disabled="!select" @click="addItemToSelection" fab color="success"
                 ><v-icon> mdi-plus </v-icon>
             </v-btn>
         </v-col>
@@ -47,7 +47,7 @@ export default {
         },
         addItemToSelection() {
             console.log(this.select);
-            this.$store.commit("selection/addItem", this.select);
+            this.$store.commit("selection/addItem", { name: this.select });
         },
     },
 };
