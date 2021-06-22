@@ -6,6 +6,7 @@
                 :items="items"
                 clearable
                 solo
+                hide-selected
                 @keyup="updateCurrentValue"
             >
                 <template v-slot:no-data>

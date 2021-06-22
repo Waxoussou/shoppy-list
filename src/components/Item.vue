@@ -32,11 +32,11 @@
                 </v-row>
             </v-list-item-action>
         </v-row>
-        <v-row v-if="!isLastItem(item)">
+        <!-- <v-row v-if="!isLastItem(item)">
             <v-col cols="12">
                 <v-divider></v-divider>
             </v-col>
-        </v-row>
+        </v-row> -->
     </v-container>
 </template>
 

@@ -4,8 +4,6 @@
             <v-list-group
                 v-for="(category, index) of itemsByCategory"
                 :key="index"
-                multiple
-                no-action
             >
                 <template v-slot:activator>
                     <v-list-item-content>
@@ -20,7 +18,6 @@
                 >
                     <Item :item="item" />
                 </v-list-item>
-                <!-- <v-divider></v-divider> -->
             </v-list-group>
         </v-list>
     </v-card>
