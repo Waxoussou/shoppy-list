@@ -4,12 +4,15 @@
             <v-list-item-action-text>
                 X {{ item.quantity || 1 }}
             </v-list-item-action-text>
-            <v-list-item-content>
+
+            <v-list-item-content class="ml-3">
                 {{ item.name || item }}
             </v-list-item-content>
+
             <v-list-item-action>
                 <v-row>
                     <v-btn
+                        x-small
                         @click="openUpdateItemModal(item)"
                         color="primary"
                         fab
@@ -17,7 +20,13 @@
                     >
                         <v-icon> mdi-pencil </v-icon>
                     </v-btn>
-                    <v-btn @click="removeItem(item)" color="success" icon fab>
+                    <v-btn
+                        @click="removeItem(item)"
+                        color="success"
+                        icon
+                        fab
+                        x-small
+                    >
                         <v-icon>mdi-check</v-icon>
                     </v-btn>
                 </v-row>

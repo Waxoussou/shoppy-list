@@ -1,12 +1,27 @@
 <template>
     <v-card v-if="items.length">
-        <v-list>
-            <!-- v-for="(category, index) in categories" :key="index" -->
-            <!-- <v-subheader>{{ category }}</v-subheader> -->
-            <v-list-item v-for="(item, index) in items" :key="index">
-                <Item :item="item" />
-            </v-list-item>
-            <v-divider></v-divider>
+        <v-list dense>
+            <v-list-group
+                v-for="(category, index) of itemsByCategory"
+                :key="index"
+                multiple
+                no-action
+            >
+                <template v-slot:activator>
+                    <v-list-item-content>
+                        <v-list-item-title
+                            v-text="category.name"
+                        ></v-list-item-title>
+                    </v-list-item-content>
+                </template>
+                <v-list-item
+                    v-for="(item, index) in category.values"
+                    :key="index"
+                >
+                    <Item :item="item" />
+                </v-list-item>
+                <!-- <v-divider></v-divider> -->
+            </v-list-group>
         </v-list>
     </v-card>
     <v-row v-else justify="center" align="center" style="min-height: 500px">
@@ -35,8 +50,15 @@ export default {
             return this.$store.state.selection.items;
         },
         itemsByCategory() {
+            // return [
+            //     { name: "other", values: ["value1", "value2"] },
+            //     { name: "fruits & légume", values: ["banane", "orange"] },
+            // ];
             return this.$store.getters["selection/byCategory"];
         },
+        // categories() {
+        //     return [...Object.keys(this.itemsByCategory)];
+        // },
     },
 
     async created() {
